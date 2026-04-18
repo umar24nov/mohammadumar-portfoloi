@@ -301,7 +301,7 @@ function Hero() {
             Put your resume PDF in /public as "resume.pdf"
             OR replace href with your Google Drive shareable link.
           */}
-          <a href="https://drive.google.com/file/d/1WJZPSl6xhVwZCFN5yqoOan0Qq2QvV6NF/view?usp=drive_link" download="Resume"
+          <a href="https://drive.google.com/file/d/12ItA_6YPw4giluYcBjK7El15Q8Ubi60c/view?usp=drive_link" download="Resume"
             className="font-spacemono text-[11px] md:text-xs font-bold tracking-widest px-5 md:px-8 py-2.5 md:py-3 rounded bg-transparent text-[#34d399] border border-[#34d399] no-underline hover:bg-[rgba(52,211,153,0.1)] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-200 inline-flex items-center gap-2">
             ⬇ Download CV
           </a>
