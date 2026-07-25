@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { ThemeProvider } from "./context/ThemeContext";
 
 import AnimatedCanvas from "./components/layout/AnimatedCanvas";
 import Navbar from "./components/layout/Navbar";
@@ -16,28 +19,48 @@ import GitHubMap from "./components/sections/GitHubMap";
 import FeedbackButton from "./components/feedback/FeedbackButton";
 import FeedbackModal from "./components/feedback/FeedbackModal";
 
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Projects />
+      <Skills />
+      <CodeSignature />
+      <Education />
+      <Contact />
+      <GitHubMap />
+    </>
+  );
+}
+
 export default function App() {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   return (
-    <div className="bg-[#050b14] text-[#e2eaf2] min-h-screen overflow-x-hidden">
-      <AnimatedCanvas />
-      <Navbar onFeedback={() => setFeedbackOpen(true)} />
+    <ThemeProvider>
+      <BrowserRouter>
+        <div className="bg-[#050b14] text-[#e2eaf2] min-h-screen overflow-x-hidden">
+          <AnimatedCanvas />
+          <Navbar onFeedback={() => setFeedbackOpen(true)} />
 
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <CodeSignature />
-        <Education />
-        <Contact />
-        <GitHubMap />
-      </main>
+          <main>
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+              </Routes>
+            </AnimatePresence>
+          </main>
 
-      <Footer />
-      <FeedbackButton onClick={() => setFeedbackOpen(true)} />
-      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
-    </div>
+          <Footer />
+          <FeedbackButton onClick={() => setFeedbackOpen(true)} />
+          <AnimatePresence>
+            {feedbackOpen && (
+              <FeedbackModal onClose={() => setFeedbackOpen(false)} />
+            )}
+          </AnimatePresence>
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }

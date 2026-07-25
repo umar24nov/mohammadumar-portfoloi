@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Section from "../ui/Section";
 import SectionHeading from "../ui/SectionHeading";
 import { SOCIAL_LINKS } from "../../config/constants";
@@ -35,13 +36,18 @@ export default function Contact() {
         </p>
 
         <div className="flex flex-col gap-4">
-          {contacts.map((c) => (
-            <a
+          {contacts.map((c, i) => (
+            <motion.a
               key={c.label}
               href={c.href}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-4 bg-[#0d1a2a] border border-[#1a3040] rounded-xl px-4 md:px-6 py-4 md:py-5 no-underline group hover:border-[#00d4ff] hover:translate-x-2 transition-all duration-200"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12, duration: 0.4 }}
+              whileHover={{ x: 8, borderColor: "#00d4ff" }}
+              className="flex items-center gap-4 bg-[#0d1a2a] border border-[#1a3040] rounded-xl px-4 md:px-6 py-4 md:py-5 no-underline group transition-all duration-200"
             >
               <span className="text-2xl">{c.icon}</span>
               <div>
@@ -50,10 +56,13 @@ export default function Contact() {
                 </div>
                 <div className="font-dmsans text-[#e2eaf2] text-sm">{c.value}</div>
               </div>
-              <span className="ml-auto text-[#6b8599] text-lg group-hover:text-[#00d4ff] transition-colors">
+              <motion.span
+                whileHover={{ x: 4 }}
+                className="ml-auto text-[#6b8599] text-lg group-hover:text-[#00d4ff] transition-colors"
+              >
                 →
-              </span>
-            </a>
+              </motion.span>
+            </motion.a>
           ))}
         </div>
       </div>

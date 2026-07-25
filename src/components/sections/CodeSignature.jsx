@@ -1,8 +1,10 @@
-import useScrollReveal from "../../hooks/useScrollReveal";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import SectionHeading from "../ui/SectionHeading";
 
 export default function CodeSignature() {
-  const ref = useScrollReveal();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const lines = [
     <>
@@ -152,16 +154,33 @@ export default function CodeSignature() {
   return (
     <section
       ref={ref}
-      className="reveal py-14 md:py-24 px-4 sm:px-6 md:px-[5vw] max-w-[1100px] mx-auto relative z-10"
+      className="py-14 md:py-24 px-4 sm:px-6 md:px-[5vw] max-w-[1100px] mx-auto relative z-10"
     >
       <SectionHeading label="04 // MY THINKING" title="Code Signature" />
 
-      <div className="relative rounded-2xl overflow-hidden border border-[#1a3040] hover:border-[#00d4ff] transition-colors duration-500 shadow-[0_0_40px_rgba(0,212,255,0.04)]">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="relative rounded-2xl overflow-hidden border border-[#1a3040] hover:border-[#00d4ff] transition-colors duration-500 shadow-[0_0_40px_rgba(0,212,255,0.04)]"
+      >
         {/* Editor title bar */}
         <div className="bg-[#0a1622] border-b border-[#1a3040] px-5 py-3 flex items-center gap-3">
-          <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-          <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-          <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+            className="w-3 h-3 rounded-full bg-[#ff5f57]"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+            className="w-3 h-3 rounded-full bg-[#febc2e]"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+            className="w-3 h-3 rounded-full bg-[#28c840]"
+          />
           <span className="font-spacemono text-[#6b8599] text-xs ml-4 tracking-wide">
             umar.py
           </span>
@@ -170,33 +189,40 @@ export default function CodeSignature() {
           </span>
         </div>
 
-        {/* Code body */}
+        {/* Code body — line by line reveal */}
         <div className="bg-[#070f1a] p-3 sm:p-5 md:p-8 overflow-x-auto">
           <pre className="font-spacemono text-[11px] sm:text-xs md:text-sm leading-6 md:leading-7 m-0">
             {lines.map((line, i) => (
-              <div
+              <motion.div
                 key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.1 + i * 0.04, duration: 0.3 }}
                 className="flex gap-6 hover:bg-[rgba(0,212,255,0.03)] rounded px-2 -mx-2 transition-colors"
               >
                 <span className="select-none text-[#2a4050] text-xs w-5 shrink-0 text-right mt-0.5">
                   {i + 1}
                 </span>
                 <span>{line}</span>
-              </div>
+              </motion.div>
             ))}
           </pre>
         </div>
 
         {/* Status bar */}
         <div className="bg-[#0a1622] border-t border-[#1a3040] px-5 py-2 flex items-center gap-4">
-          <span className="font-spacemono text-[#00d4ff] text-[10px] tracking-widest">
+          <motion.span
+            animate={{ opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="font-spacemono text-[#00d4ff] text-[10px] tracking-widest"
+          >
             ● RUNNING
-          </span>
+          </motion.span>
           <span className="font-spacemono text-[#6b8599] text-[10px] ml-auto">
             UTF-8 · LF · Python
           </span>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

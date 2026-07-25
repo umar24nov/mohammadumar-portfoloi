@@ -1,17 +1,29 @@
+import { motion } from "framer-motion";
 import Section from "../ui/Section";
 import SectionHeading from "../ui/SectionHeading";
-import useScrollReveal from "../../hooks/useScrollReveal";
 import projects from "../../config/projectsData";
 
-function ProjectCard({ project, index }) {
-  const ref = useScrollReveal();
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.12, ease: "easeOut" },
+  }),
+};
 
+function ProjectCard({ project, index }) {
   return (
-    <div
-      ref={ref}
-      className={`reveal bg-[#0d1a2a] border border-[#1a3040] ${project.border} rounded-xl p-4 md:p-7 relative overflow-hidden hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-300`}
-      style={{ transitionDelay: `${index * 0.12}s` }}
+    <motion.div
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}
+      className="bg-[#0d1a2a] border border-[#1a3040] hover:border-[#00d4ff] rounded-xl p-4 md:p-7 relative overflow-hidden transition-all duration-300"
     >
+      {/* Top accent bar */}
       <div
         className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${project.topBar} to-transparent opacity-40`}
       />
@@ -54,24 +66,28 @@ function ProjectCard({ project, index }) {
       </div>
 
       <div className="flex gap-3 flex-wrap">
-        <a
+        <motion.a
           href={project.demo}
           target="_blank"
           rel="noreferrer"
-          className={`font-spacemono text-[11px] font-bold tracking-wide no-underline px-4 py-2 rounded border ${project.tag} hover:opacity-80 transition-opacity duration-200 inline-flex items-center gap-1.5`}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className={`font-spacemono text-[11px] font-bold tracking-wide no-underline px-4 py-2 rounded border ${project.tag} transition-opacity duration-200 inline-flex items-center gap-1.5`}
         >
           🚀 Live Demo
-        </a>
-        <a
+        </motion.a>
+        <motion.a
           href={project.github}
           target="_blank"
           rel="noreferrer"
-          className="font-spacemono text-[11px] tracking-wide no-underline px-4 py-2 rounded border border-[#1a3040] text-[#6b8599] hover:border-[#e2eaf2] hover:text-[#e2eaf2] transition-all duration-200 inline-flex items-center gap-1.5"
+          whileHover={{ scale: 1.03, borderColor: "#e2eaf2", color: "#e2eaf2" }}
+          whileTap={{ scale: 0.97 }}
+          className="font-spacemono text-[11px] tracking-wide no-underline px-4 py-2 rounded border border-[#1a3040] text-[#6b8599] transition-all duration-200 inline-flex items-center gap-1.5"
         >
           🐙 GitHub
-        </a>
+        </motion.a>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

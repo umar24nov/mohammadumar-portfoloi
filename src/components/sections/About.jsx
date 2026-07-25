@@ -1,6 +1,12 @@
+import { motion } from "framer-motion";
 import Section from "../ui/Section";
 import SectionHeading from "../ui/SectionHeading";
 import { SOCIAL_LINKS } from "../../config/constants";
+
+const cardVariant = {
+  hidden: { opacity: 0, scale: 0.8 },
+  show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 150, damping: 15 } },
+};
 
 export default function About() {
   const stats = [
@@ -33,26 +39,43 @@ export default function About() {
             polished products. Driven by curiosity — always learning, always shipping.
           </p>
 
-          <div className="mt-7 flex gap-3 flex-wrap">
-            {links.map((link) => (
-              <a
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-7 flex gap-3 flex-wrap"
+          >
+            {links.map((link, i) => (
+              <motion.a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-spacemono text-[#00d4ff] text-[11px] tracking-wide no-underline border border-[#1a3040] px-3 py-2 rounded hover:border-[#00d4ff] transition-colors duration-200 inline-block"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + i * 0.1 }}
+                whileHover={{ y: -2, borderColor: "#00d4ff" }}
+                className="font-spacemono text-[#00d4ff] text-[11px] tracking-wide no-underline border border-[#1a3040] px-3 py-2 rounded transition-colors duration-200 inline-block"
               >
                 {link.label}
-              </a>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-2 gap-5">
-          {stats.map((stat) => (
-            <div
+          {stats.map((stat, i) => (
+            <motion.div
               key={stat.label}
-              className="bg-[#0d1a2a] border border-[#1a3040] rounded-xl p-4 md:p-6 hover:border-[#00d4ff] transition-colors duration-300"
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -5, borderColor: "#00d4ff" }}
+              className="bg-[#0d1a2a] border border-[#1a3040] rounded-xl p-4 md:p-6 transition-colors duration-300"
             >
               <div className="text-3xl mb-3">{stat.icon}</div>
               {stat.value === "dev+ml" ? (
@@ -68,7 +91,7 @@ export default function About() {
               <div className="font-spacemono text-[#6b8599] text-[11px] tracking-widest">
                 {stat.label}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
