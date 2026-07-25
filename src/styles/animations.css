@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+
+/* ─────────────────────────────────────────────
+   KEYFRAME ANIMATIONS
+   All visual animations live here.
+   Components reference these via class names.
+───────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes scrollDot {
+  0%   { transform: translateY(0);    opacity: 1; }
+  80%  { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 0; }
+}
+
+@keyframes scan {
+  0%   { top: 0%;   }
+  100% { top: 100%; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px  rgba(0,212,255,0.3); }
+  50%       { box-shadow: 0 0 22px rgba(0,212,255,0.8); }
+}
+
+/* ─────────────────────────────────────────────
+   ANIMATION UTILITY CLASSES
+   Add these to any element to animate it.
+───────────────────────────────────────────── */
+
+.anim-fadeUp-d1 { opacity:0; animation: fadeUp 0.6s 0.2s forwards; }
+.anim-fadeUp-d2 { opacity:0; animation: fadeUp 0.6s 0.4s forwards; }
+.anim-fadeUp-d3 { opacity:0; animation: fadeUp 0.6s 0.6s forwards; }
+.anim-fadeUp-d4 { opacity:0; animation: fadeUp 0.6s 0.8s forwards; }
+.anim-fadeUp-d5 { opacity:0; animation: fadeUp 0.6s 1.0s forwards; }
+.anim-fadeUp-d6 { opacity:0; animation: fadeUp 0.6s 1.2s forwards; }
+.anim-blink     { animation: blink     0.8s step-end    infinite; }
+.anim-scrollDot { animation: scrollDot 1.6s ease-in-out infinite; }
+.anim-scan      { position: absolute; animation: scan 4s linear infinite; }
+.anim-slideUp   { animation: slideUp  0.35s ease        forwards; }
+.anim-pulseGlow { animation: pulseGlow 2.2s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL
+   JS adds .visible via IntersectionObserver
+───────────────────────────────────────────── */
+
+.reveal         { opacity:0; transform:translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ─────────────────────────────────────────────
+   SKILL BARS
+   JS adds .filled when scrolled into view
+───────────────────────────────────────────── */
+
+.skill-bar        { width: 0%;                 transition: width 1.1s ease; }
+.skill-bar.filled { width: var(--skill-level); }
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR
+───────────────────────────────────────────── */
+
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #050b14; }
+::-webkit-scrollbar-thumb { background: #00d4ff; border-radius: 3px; }
+html { scroll-behavior: smooth; }
+
+/* ─────────────────────────────────────────────
+   FONT UTILITIES
+───────────────────────────────────────────── */
+
+.font-orbitron  { font-family: 'Orbitron',   monospace; }
+.font-spacemono { font-family: 'Space Mono', monospace; }
+.font-dmsans    { font-family: 'DM Sans',    sans-serif; }
+
+/* ─────────────────────────────────────────────
+   FORM INPUTS (Feedback Modal)
+───────────────────────────────────────────── */
+
+.form-input {
+  background: #0a1929; border: 1px solid #1a3040; border-radius: 8px;
+  color: #e2eaf2; font-family: 'DM Sans', sans-serif; font-size: 14px;
+  padding: 11px 15px; width: 100%; outline: none; transition: border-color 0.2s;
+}
+.form-input:focus        { border-color: #00d4ff; }
+.form-input::placeholder { color: #4a6070; }
+
+/* ─────────────────────────────────────────────
+   CODE SYNTAX COLOURS (CodeSignature)
+───────────────────────────────────────────── */
+
+.ck { color: #c792ea; }   /* keyword  */
+.cf { color: #82aaff; }   /* function */
+.cs { color: #c3e88d; }   /* string   */
+.cc { color: #546e7a; font-style: italic; } /* comment */
+.cn { color: #f78c6c; }   /* number   */
+.cv { color: #eeffff; }   /* variable */
+.co { color: #89ddff; }   /* operator */
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE TWEAKS
+───────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .nav-logo { font-size: 12px; letter-spacing: 1px; }
+  .hero-blob { width: 260px; height: 260px; }
+  .code-line-num { display: none; }
+  .gh-stats-row { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 480px) {
+  .anim-fadeUp-d6 { display: none; }
+}
