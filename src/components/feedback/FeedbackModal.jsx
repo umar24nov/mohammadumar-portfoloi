@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { db } from "../../config/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { feedbackAPI } from "../../config/api";
 import { FEEDBACK_TYPES } from "../../config/constants";
 
 const backdrop = {
@@ -27,21 +26,20 @@ export default function FeedbackModal({ onClose }) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async () => {
     if (!message.trim()) return;
+    setLoading(true);
+    setError("");
     try {
-      await addDoc(collection(db, "feedback"), {
-        type,
-        name,
-        email,
-        message,
-        createdAt: serverTimestamp(),
-      });
+      await feedbackAPI.submit({ type, name, email, message });
       setSent(true);
     } catch (err) {
-      console.error("Firebase error:", err);
-      alert("Something went wrong. Please try again.");
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -130,6 +128,15 @@ export default function FeedbackModal({ onClose }) {
                   exit={{ opacity: 0 }}
                   className="flex flex-col gap-2.5"
                 >
+                  {error && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="bg-[rgba(255,107,107,0.1)] border border-[#ff6b6b] rounded px-3 py-2"
+                    >
+                      <p className="font-dmsans text-[#ff6b6b] text-[11px]">{error}</p>
+                    </motion.div>
+                  )}
                   {/* Type selector */}
                   <div>
                     <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[3px] mb-1.5">
@@ -203,14 +210,14 @@ export default function FeedbackModal({ onClose }) {
                     whileHover={message.trim() ? { boxShadow: "0 0 16px rgba(0,212,255,0.4)" } : {}}
                     whileTap={message.trim() ? { scale: 0.97 } : {}}
                     onClick={handleSubmit}
-                    disabled={!message.trim()}
+                    disabled={!message.trim() || loading}
                     className={`font-spacemono text-[11px] font-bold tracking-widest py-2 rounded border-none transition-all cursor-pointer ${
-                      message.trim()
+                      message.trim() && !loading
                         ? "bg-[#00d4ff] text-black"
                         : "bg-[#1a3040] text-[#3a5060] cursor-not-allowed"
                     }`}
                   >
-                    Send Feedback ✈
+                    {loading ? "Sending..." : "Send Feedback ✈"}
                   </motion.button>
                 </motion.div>
               )}
