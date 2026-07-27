@@ -1,25 +1,28 @@
 import { motion } from "framer-motion";
-import { useTheme } from "../../context/ThemeContext";
 
 export default function Footer() {
-  const { theme } = useTheme();
-
   return (
     <footer
-      className={`border-t py-7 text-center relative z-10 transition-colors duration-500 ${
-        theme === "dark" ? "border-[#1a3040]" : "border-gray-200"
-      }`}
+      className="py-8 text-center relative z-10"
+      style={{ borderTop: "1px solid var(--border-primary)" }}
     >
-      <motion.p
+      <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="font-spacemono text-[#6b8599] text-xs tracking-wide"
+        className="flex flex-col items-center gap-3"
       >
-        Designed & Built by{" "}
-        <span className="text-[#00d4ff]">Mohd Umar</span> · {new Date().getFullYear()} ·
-        All Rights Reserved
-      </motion.p>
+        <p className="font-code text-[10px] tracking-[3px]" style={{ color: "var(--text-muted)" }}>
+          DESIGNED & BUILT BY
+        </p>
+        <p className="font-code text-xs tracking-widest" style={{ color: "var(--accent)" }}>
+          MOHD UMAR
+        </p>
+        <div className="w-8 h-[1px] my-1" style={{ background: "var(--gradient-accent)" }} />
+        <p className="font-code text-[10px] tracking-wide" style={{ color: "var(--text-muted)" }}>
+          © {new Date().getFullYear()} · ALL RIGHTS RESERVED
+        </p>
+      </motion.div>
     </footer>
   );
 }

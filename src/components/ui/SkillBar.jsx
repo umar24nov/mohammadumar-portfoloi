@@ -14,24 +14,26 @@ export default function SkillBar({ name, level }) {
   }, [isInView]);
 
   return (
-    <div className="mb-4">
-      <div className="flex justify-between mb-1.5">
-        <span className="font-dmsans text-[#e2eaf2] text-sm">{name}</span>
+    <div className="mb-5">
+      <div className="flex justify-between mb-2">
+        <span className="font-code text-[12px] tracking-wide" style={{ color: "var(--text-primary)" }}>{name}</span>
         <motion.span
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="font-spacemono text-[#00d4ff] text-xs"
+          className="font-code text-[10px]"
+          style={{ color: "var(--accent)" }}
         >
           {level}%
         </motion.span>
       </div>
-      <div className="h-1.5 bg-[#1a3040] rounded-full overflow-hidden" ref={ref}>
+      <div className="h-1 rounded-full overflow-hidden" ref={ref} style={{ backgroundColor: "var(--bg-tertiary)" }}>
         <motion.div
           initial={{ width: 0 }}
           animate={animated ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1.1, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-[#00d4ff] to-[#00aacc] rounded-full shadow-[0_0_8px_#00d4ff]"
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="h-full rounded-full"
+          style={{ background: "var(--gradient-accent)", boxShadow: "0 0 10px var(--accent-glow-strong)" }}
         />
       </div>
     </div>

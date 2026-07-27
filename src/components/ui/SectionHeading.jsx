@@ -1,13 +1,25 @@
+import { motion } from "framer-motion";
+
 export default function SectionHeading({ label, title }) {
   return (
-    <div className="mb-8 md:mb-14">
-      <p className="font-spacemono text-[#00d4ff] text-[11px] tracking-[5px] mb-2">
-        {label}
-      </p>
-      <h2 className="font-orbitron font-extrabold text-[clamp(28px,5vw,44px)] text-[#e2eaf2] m-0">
+    <div className="mb-10 md:mb-16">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "var(--accent)" }} />
+        <p className="font-code text-[10px] tracking-[4px]" style={{ color: "var(--accent)" }}>
+          {label}
+        </p>
+      </div>
+      <h2 className="font-code font-bold text-[clamp(26px,5vw,42px)] m-0 tracking-tight" style={{ color: "var(--text-primary)" }}>
         {title}
       </h2>
-      <div className="mt-3 w-14 h-[3px] rounded bg-gradient-to-r from-[#00d4ff] to-transparent" />
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        className="mt-4 w-16 h-[2px] origin-left"
+        style={{ background: "var(--gradient-accent)" }}
+      />
     </div>
   );
 }

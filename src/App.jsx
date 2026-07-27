@@ -40,7 +40,10 @@ export default function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <div className="bg-[#050b14] text-[#e2eaf2] min-h-screen overflow-x-hidden">
+        <div
+          className="min-h-screen overflow-x-hidden grid-bg"
+          style={{ backgroundColor: "var(--bg-primary)", color: "var(--text-primary)" }}
+        >
           <AnimatedCanvas />
           <Navbar onFeedback={() => setFeedbackOpen(true)} />
 

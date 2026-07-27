@@ -10,14 +10,15 @@ const backdrop = {
 };
 
 const modal = {
-  hidden: { opacity: 0, y: 60, scale: 0.95 },
+  hidden: { opacity: 0, y: 50, scale: 0.96, filter: "blur(4px)" },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { type: "spring", stiffness: 300, damping: 25 },
+    filter: "blur(0px)",
+    transition: { type: "spring", stiffness: 300, damping: 28 },
   },
-  exit: { opacity: 0, y: 40, scale: 0.95, transition: { duration: 0.2 } },
+  exit: { opacity: 0, y: 30, scale: 0.96, transition: { duration: 0.2 } },
 };
 
 export default function FeedbackModal({ onClose }) {
@@ -51,7 +52,7 @@ export default function FeedbackModal({ onClose }) {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4"
+        className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 backdrop-blur-sm px-4"
         onClick={onClose}
       >
         <motion.div
@@ -60,36 +61,32 @@ export default function FeedbackModal({ onClose }) {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="w-full max-w-[340px] bg-[#0a1929] border border-[#1a3040] rounded-xl shadow-[0_8px_40px_rgba(0,0,0,0.8)]"
+          className="w-full max-w-[340px] rounded-sm overflow-hidden"
+          style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="p-4">
-            {/* Header */}
             <div className="flex items-center justify-between mb-2">
               <div>
-                <h3 className="font-orbitron text-[#e2eaf2] text-[13px] font-bold leading-tight">
-                  Report / Feedback
+                <h3 className="font-code text-[12px] font-bold tracking-wide" style={{ color: "var(--text-primary)" }}>
+                  REPORT / FEEDBACK
                 </h3>
-                <p className="font-dmsans text-[#6b8599] text-[11px] mt-0.5">
+                <p className="font-code text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
                   Bug? Idea? Let me know!
                 </p>
               </div>
               <motion.button
-                whileHover={{ scale: 1.1, color: "#e2eaf2" }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClose}
-                className="text-[#6b8599] text-base bg-transparent border-none cursor-pointer ml-2"
+                className="text-base bg-transparent border-none cursor-pointer ml-2"
+                style={{ color: "var(--text-muted)" }}
               >
                 ✕
               </motion.button>
             </div>
 
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.2, duration: 0.4 }}
-              className="h-px bg-gradient-to-r from-[#00d4ff] via-[#1a3040] to-transparent mb-3 origin-left"
-            />
+            <div className="h-[1px] my-3" style={{ background: "var(--gradient-accent)", opacity: 0.4 }} />
 
             <AnimatePresence mode="wait">
               {sent ? (
@@ -107,17 +104,18 @@ export default function FeedbackModal({ onClose }) {
                   >
                     🎉
                   </motion.div>
-                  <p className="font-orbitron text-[#00d4ff] text-xs mb-1">Thanks!</p>
-                  <p className="font-dmsans text-[#6b8599] text-[11px]">
+                  <p className="font-code text-[11px] tracking-widest mb-1" style={{ color: "var(--green)" }}>THANKS!</p>
+                  <p className="font-body text-[11px]" style={{ color: "var(--text-muted)" }}>
                     I'll get back to you soon.
                   </p>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
                     onClick={onClose}
-                    className="font-spacemono text-[11px] text-[#00d4ff] border border-[#00d4ff] px-4 py-1.5 rounded mt-3 bg-transparent cursor-pointer hover:bg-[rgba(0,212,255,0.1)] transition-all"
+                    className="font-code text-[10px] tracking-widest px-4 py-1.5 rounded-sm mt-3 bg-transparent cursor-pointer"
+                    style={{ color: "var(--accent)", border: "1px solid var(--accent)" }}
                   >
-                    Close ✓
+                    CLOSE ✓
                   </motion.button>
                 </motion.div>
               ) : (
@@ -132,28 +130,28 @@ export default function FeedbackModal({ onClose }) {
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
-                      className="bg-[rgba(255,107,107,0.1)] border border-[#ff6b6b] rounded px-3 py-2"
+                      className="rounded-sm px-3 py-2"
+                      style={{ backgroundColor: "rgba(255,71,87,0.08)", border: "1px solid var(--red)" }}
                     >
-                      <p className="font-dmsans text-[#ff6b6b] text-[11px]">{error}</p>
+                      <p className="font-code text-[10px]" style={{ color: "var(--red)" }}>{error}</p>
                     </motion.div>
                   )}
-                  {/* Type selector */}
+
                   <div>
-                    <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[3px] mb-1.5">
-                      TYPE
-                    </p>
+                    <p className="font-code text-[9px] tracking-[3px] mb-1.5" style={{ color: "var(--text-muted)" }}>TYPE</p>
                     <div className="grid grid-cols-2 gap-1.5">
                       {FEEDBACK_TYPES.map(({ emoji, label }) => (
                         <motion.button
                           key={label}
-                          whileHover={{ scale: 1.03 }}
+                          whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.97 }}
                           onClick={() => setType(label)}
-                          className={`font-spacemono text-[10px] px-2 py-1.5 rounded border cursor-pointer transition-all text-left leading-tight ${
-                            type === label
-                              ? "bg-[rgba(0,212,255,0.15)] border-[#00d4ff] text-[#00d4ff]"
-                              : "bg-transparent border-[#1a3040] text-[#6b8599] hover:border-[#00d4ff]"
-                          }`}
+                          className="font-code text-[9px] px-2 py-1.5 rounded-sm border cursor-pointer text-left leading-tight tracking-wider"
+                          style={{
+                            backgroundColor: type === label ? "var(--accent-glow)" : "transparent",
+                            borderColor: type === label ? "var(--accent)" : "var(--border-primary)",
+                            color: type === label ? "var(--accent)" : "var(--text-muted)",
+                          }}
                         >
                           {emoji} {label}
                         </motion.button>
@@ -161,12 +159,9 @@ export default function FeedbackModal({ onClose }) {
                     </div>
                   </div>
 
-                  {/* Name + Email */}
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[2px] mb-1">
-                        NAME
-                      </p>
+                      <p className="font-code text-[9px] tracking-[2px] mb-1" style={{ color: "var(--text-muted)" }}>NAME</p>
                       <input
                         className="form-input"
                         style={{ padding: "7px 10px", fontSize: "12px" }}
@@ -176,9 +171,7 @@ export default function FeedbackModal({ onClose }) {
                       />
                     </div>
                     <div>
-                      <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[2px] mb-1">
-                        EMAIL
-                      </p>
+                      <p className="font-code text-[9px] tracking-[2px] mb-1" style={{ color: "var(--text-muted)" }}>EMAIL</p>
                       <input
                         className="form-input"
                         style={{ padding: "7px 10px", fontSize: "12px" }}
@@ -190,10 +183,9 @@ export default function FeedbackModal({ onClose }) {
                     </div>
                   </div>
 
-                  {/* Message */}
                   <div>
-                    <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[2px] mb-1">
-                      MESSAGE <span className="text-[#ff6b6b]">*</span>
+                    <p className="font-code text-[9px] tracking-[2px] mb-1" style={{ color: "var(--text-muted)" }}>
+                      MESSAGE <span style={{ color: "var(--red)" }}>*</span>
                     </p>
                     <textarea
                       className="form-input resize-none"
@@ -205,19 +197,19 @@ export default function FeedbackModal({ onClose }) {
                     />
                   </div>
 
-                  {/* Submit */}
                   <motion.button
-                    whileHover={message.trim() ? { boxShadow: "0 0 16px rgba(0,212,255,0.4)" } : {}}
+                    whileHover={message.trim() ? { boxShadow: "0 0 16px var(--accent-glow-strong)" } : {}}
                     whileTap={message.trim() ? { scale: 0.97 } : {}}
                     onClick={handleSubmit}
                     disabled={!message.trim() || loading}
-                    className={`font-spacemono text-[11px] font-bold tracking-widest py-2 rounded border-none transition-all cursor-pointer ${
-                      message.trim() && !loading
-                        ? "bg-[#00d4ff] text-black"
-                        : "bg-[#1a3040] text-[#3a5060] cursor-not-allowed"
-                    }`}
+                    className="font-code text-[10px] font-bold tracking-widest py-2 rounded-sm border-none cursor-pointer"
+                    style={{
+                      background: message.trim() && !loading ? "var(--gradient-accent)" : "var(--bg-tertiary)",
+                      color: message.trim() && !loading ? "#fff" : "var(--text-muted)",
+                      cursor: message.trim() && !loading ? "pointer" : "not-allowed",
+                    }}
                   >
-                    {loading ? "Sending..." : "Send Feedback ✈"}
+                    {loading ? "SENDING..." : "SEND FEEDBACK →"}
                   </motion.button>
                 </motion.div>
               )}

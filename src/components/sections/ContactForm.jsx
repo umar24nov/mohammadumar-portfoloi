@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { contactAPI } from "../../config/api";
 
@@ -27,7 +27,7 @@ export default function ContactForm() {
   if (sent) {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-8"
       >
@@ -38,17 +38,18 @@ export default function ContactForm() {
         >
           🎉
         </motion.div>
-        <p className="font-orbitron text-[#00d4ff] text-sm mb-1">Message Sent!</p>
-        <p className="font-dmsans text-[#6b8599] text-sm mb-4">
+        <p className="font-code text-sm mb-1 tracking-wide" style={{ color: "var(--green)" }}>MESSAGE SENT!</p>
+        <p className="font-body text-sm mb-4" style={{ color: "var(--text-secondary)" }}>
           Thanks for reaching out. I'll get back to you soon.
         </p>
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           onClick={() => setSent(false)}
-          className="font-spacemono text-[11px] text-[#00d4ff] border border-[#00d4ff] px-4 py-2 rounded bg-transparent cursor-pointer hover:bg-[rgba(0,212,255,0.1)] transition-all"
+          className="font-code text-[10px] tracking-widest px-5 py-2 rounded-sm bg-transparent cursor-pointer"
+          style={{ color: "var(--accent)", border: "1px solid var(--accent)" }}
         >
-          Send Another Message
+          SEND ANOTHER
         </motion.button>
       </motion.div>
     );
@@ -60,32 +61,33 @@ export default function ContactForm() {
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="bg-[rgba(255,107,107,0.1)] border border-[#ff6b6b] rounded px-4 py-3"
+          className="rounded-sm px-4 py-3"
+          style={{ backgroundColor: "rgba(255,71,87,0.08)", border: "1px solid var(--red)" }}
         >
-          <p className="font-dmsans text-[#ff6b6b] text-xs">{error}</p>
+          <p className="font-code text-[11px]" style={{ color: "var(--red)" }}>{error}</p>
         </motion.div>
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[3px] mb-1.5">
-            NAME <span className="text-[#ff6b6b]">*</span>
+          <p className="font-code text-[9px] tracking-[3px] mb-1.5" style={{ color: "var(--text-muted)" }}>
+            NAME <span style={{ color: "var(--red)" }}>*</span>
           </p>
           <input
             {...register("name", {
               required: "Name is required",
               maxLength: { value: 100, message: "Name too long" },
             })}
-            className={`form-input ${errors.name ? "border-[#ff6b6b]" : ""}`}
+            className={`form-input ${errors.name ? "border-[#ff4757]" : ""}`}
             placeholder="Your name"
           />
           {errors.name && (
-            <p className="font-dmsans text-[#ff6b6b] text-[10px] mt-1">{errors.name.message}</p>
+            <p className="font-code text-[10px] mt-1" style={{ color: "var(--red)" }}>{errors.name.message}</p>
           )}
         </div>
         <div>
-          <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[3px] mb-1.5">
-            EMAIL <span className="text-[#ff6b6b]">*</span>
+          <p className="font-code text-[9px] tracking-[3px] mb-1.5" style={{ color: "var(--text-muted)" }}>
+            EMAIL <span style={{ color: "var(--red)" }}>*</span>
           </p>
           <input
             type="email"
@@ -96,17 +98,17 @@ export default function ContactForm() {
                 message: "Invalid email",
               },
             })}
-            className={`form-input ${errors.email ? "border-[#ff6b6b]" : ""}`}
+            className={`form-input ${errors.email ? "border-[#ff4757]" : ""}`}
             placeholder="your@email.com"
           />
           {errors.email && (
-            <p className="font-dmsans text-[#ff6b6b] text-[10px] mt-1">{errors.email.message}</p>
+            <p className="font-code text-[10px] mt-1" style={{ color: "var(--red)" }}>{errors.email.message}</p>
           )}
         </div>
       </div>
 
       <div>
-        <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[3px] mb-1.5">
+        <p className="font-code text-[9px] tracking-[3px] mb-1.5" style={{ color: "var(--text-muted)" }}>
           SUBJECT
         </p>
         <input
@@ -117,8 +119,8 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <p className="font-spacemono text-[#6b8599] text-[10px] tracking-[3px] mb-1.5">
-          MESSAGE <span className="text-[#ff6b6b]">*</span>
+        <p className="font-code text-[9px] tracking-[3px] mb-1.5" style={{ color: "var(--text-muted)" }}>
+          MESSAGE <span style={{ color: "var(--red)" }}>*</span>
         </p>
         <textarea
           {...register("message", {
@@ -126,26 +128,27 @@ export default function ContactForm() {
             maxLength: { value: 5000, message: "Message too long" },
           })}
           rows={5}
-          className={`form-input resize-none ${errors.message ? "border-[#ff6b6b]" : ""}`}
+          className={`form-input resize-none ${errors.message ? "border-[#ff4757]" : ""}`}
           placeholder="Tell me about your project, idea, or just say hi..."
         />
         {errors.message && (
-          <p className="font-dmsans text-[#ff6b6b] text-[10px] mt-1">{errors.message.message}</p>
+          <p className="font-code text-[10px] mt-1" style={{ color: "var(--red)" }}>{errors.message.message}</p>
         )}
       </div>
 
       <motion.button
         type="submit"
         disabled={isSubmitting}
-        whileHover={!isSubmitting ? { boxShadow: "0 0 20px rgba(0,212,255,0.4)" } : {}}
+        whileHover={!isSubmitting ? { boxShadow: "0 0 24px var(--accent-glow-strong)" } : {}}
         whileTap={!isSubmitting ? { scale: 0.97 } : {}}
-        className={`font-spacemono text-[11px] font-bold tracking-widest py-3 rounded border-none transition-all cursor-pointer ${
-          isSubmitting
-            ? "bg-[#1a3040] text-[#3a5060] cursor-not-allowed"
-            : "bg-[#00d4ff] text-black hover:shadow-[0_0_20px_rgba(0,212,255,0.3)]"
-        }`}
+        className="font-code text-[11px] font-bold tracking-widest py-3 rounded-sm border-none cursor-pointer"
+        style={{
+          background: isSubmitting ? "var(--bg-tertiary)" : "var(--gradient-accent)",
+          color: isSubmitting ? "var(--text-muted)" : "#fff",
+          cursor: isSubmitting ? "not-allowed" : "pointer",
+        }}
       >
-        {isSubmitting ? "Sending..." : "Send Message ✈"}
+        {isSubmitting ? "SENDING..." : "SEND MESSAGE →"}
       </motion.button>
     </form>
   );

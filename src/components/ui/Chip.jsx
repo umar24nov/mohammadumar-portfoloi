@@ -1,15 +1,17 @@
-const chipColors = {
-  cyan:   "bg-[rgba(0,212,255,0.08)]   text-[#00d4ff]  border-[rgba(0,212,255,0.2)]",
-  purple: "bg-[rgba(167,139,250,0.08)] text-[#a78bfa]  border-[rgba(167,139,250,0.2)]",
-  green:  "bg-[rgba(52,211,153,0.08)]  text-[#34d399]  border-[rgba(52,211,153,0.2)]",
-  orange: "bg-[rgba(251,146,60,0.08)]  text-[#fb923c]  border-[rgba(251,146,60,0.2)]",
-  pink:   "bg-[rgba(244,114,182,0.08)] text-[#f472b6]  border-[rgba(244,114,182,0.2)]",
+const chipStyles = {
+  cyan:   { color: "var(--cyan)",    bg: "rgba(34,211,238,0.06)",  border: "rgba(34,211,238,0.15)" },
+  purple: { color: "var(--purple)",  bg: "rgba(124,58,237,0.06)",  border: "rgba(124,58,237,0.15)" },
+  green:  { color: "var(--green)",   bg: "rgba(0,255,136,0.06)",   border: "rgba(0,255,136,0.15)" },
+  orange: { color: "var(--orange)",  bg: "rgba(255,107,53,0.06)",  border: "rgba(255,107,53,0.15)" },
+  pink:   { color: "var(--magenta)", bg: "rgba(214,51,132,0.06)",  border: "rgba(214,51,132,0.15)" },
 };
 
 export default function Chip({ label, color = "cyan" }) {
+  const s = chipStyles[color] || chipStyles.cyan;
   return (
     <span
-      className={`${chipColors[color]} border font-spacemono text-[11px] px-3 py-1.5 rounded-md tracking-wide`}
+      className="font-code text-[10px] px-3 py-1.5 rounded-sm tracking-wider"
+      style={{ backgroundColor: s.bg, color: s.color, border: `1px solid ${s.border}` }}
     >
       {label}
     </span>

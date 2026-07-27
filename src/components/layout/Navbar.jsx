@@ -21,76 +21,81 @@ export default function Navbar({ onFeedback }) {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
-      className={`fixed top-0 w-full z-50 transition-all duration-500 px-[5vw] ${
-        scrolled
-          ? theme === "dark"
-            ? "bg-[#050b14]/90 backdrop-blur-md border-b border-[#1a3040]"
-            : "bg-white/90 backdrop-blur-md border-b border-gray-200"
-          : "bg-transparent"
-      }`}
+      transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.1 }}
+      className="fixed top-0 w-full z-50 px-[5vw]"
+      style={{
+        backgroundColor: scrolled ? "var(--bg-navbar)" : "transparent",
+        backdropFilter: scrolled ? "blur(24px) saturate(180%)" : "none",
+        borderBottom: scrolled ? "1px solid var(--border-primary)" : "1px solid transparent",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
     >
       <div className="max-w-[1100px] mx-auto flex items-center justify-between h-16">
         {/* Logo */}
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="nav-logo font-orbitron text-sm font-bold text-[#00d4ff] tracking-[2px] bg-transparent border-none cursor-pointer whitespace-nowrap"
+          className="nav-logo font-code text-sm font-bold tracking-[3px] bg-transparent border-none cursor-pointer whitespace-nowrap"
+          style={{ color: "var(--accent)" }}
         >
-          &lt;MOHD UMAR /&gt;
+          MU<span style={{ color: "var(--text-muted)" }}>/</span>
         </motion.button>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link, i) => (
             <motion.button
               key={link}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + i * 0.08 }}
-              whileHover={{ y: -2 }}
+              transition={{ delay: 0.3 + i * 0.06 }}
+              whileHover={{ y: -1 }}
               onClick={() => scrollTo(link)}
-              className="font-spacemono text-xs text-[#6b8599] tracking-widest bg-transparent border-none cursor-pointer hover:text-[#00d4ff] transition-colors duration-200"
+              className="font-code text-[11px] tracking-[2px] bg-transparent border-none cursor-pointer"
+              style={{ color: "var(--text-secondary)" }}
+              onMouseEnter={(e) => (e.target.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.target.style.color = "var(--text-secondary)")}
             >
               {link}
             </motion.button>
           ))}
 
-          {/* Theme toggle */}
           <motion.button
-            whileHover={{ rotate: 180, scale: 1.1 }}
+            whileHover={{ rotate: 90, scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 200 }}
             onClick={toggleTheme}
-            className="text-lg bg-transparent border-none cursor-pointer"
+            className="text-base bg-transparent border-none cursor-pointer"
             title="Toggle theme"
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            {theme === "dark" ? "☀" : "☾"}
           </motion.button>
 
           <motion.button
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            whileHover={{ scale: 1.05 }}
+            transition={{ delay: 0.7 }}
+            whileHover={{ scale: 1.05, borderColor: "var(--red)" }}
             whileTap={{ scale: 0.95 }}
             onClick={onFeedback}
-            className="font-spacemono text-[11px] text-[#ff6b6b] border border-[rgba(255,107,107,0.4)] px-3 py-1.5 rounded bg-transparent cursor-pointer hover:bg-[rgba(255,107,107,0.1)] hover:border-[#ff6b6b] transition-all duration-200 tracking-wide"
+            className="font-code text-[10px] px-3 py-1.5 rounded-sm bg-transparent cursor-pointer tracking-widest"
+            style={{ color: "var(--red)", border: "1px solid rgba(255,71,87,0.3)" }}
           >
-            🐛 Report
+            BUG
           </motion.button>
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile toggle */}
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setMenuOpen((m) => !m)}
-          className="md:hidden text-[#00d4ff] text-2xl bg-transparent border-none cursor-pointer"
+          className="md:hidden text-xl bg-transparent border-none cursor-pointer font-code"
+          style={{ color: "var(--accent)" }}
         >
-          {menuOpen ? "✕" : "☰"}
+          {menuOpen ? "✕" : "≡"}
         </motion.button>
       </div>
 
@@ -102,7 +107,8 @@ export default function Navbar({ onFeedback }) {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#050b14]/97 px-[5vw] pb-6 flex flex-col gap-4 overflow-hidden"
+            className="md:hidden px-[5vw] pb-6 flex flex-col gap-4 overflow-hidden"
+            style={{ backgroundColor: "var(--bg-navbar)" }}
           >
             {NAV_LINKS.map((link, i) => (
               <motion.button
@@ -111,7 +117,8 @@ export default function Navbar({ onFeedback }) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.05 }}
                 onClick={() => scrollTo(link)}
-                className="font-spacemono text-sm text-[#e2eaf2] text-left bg-transparent border-none cursor-pointer"
+                className="font-code text-sm text-left bg-transparent border-none cursor-pointer tracking-wide"
+                style={{ color: "var(--text-primary)" }}
               >
                 {link}
               </motion.button>
@@ -121,9 +128,10 @@ export default function Navbar({ onFeedback }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: NAV_LINKS.length * 0.05 }}
               onClick={() => { onFeedback(); setMenuOpen(false); }}
-              className="font-spacemono text-sm text-[#ff6b6b] text-left bg-transparent border-none cursor-pointer"
+              className="font-code text-sm text-left bg-transparent border-none cursor-pointer"
+              style={{ color: "var(--red)" }}
             >
-              🐛 Report / Feedback
+              BUG / FEEDBACK
             </motion.button>
           </motion.div>
         )}

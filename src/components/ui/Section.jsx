@@ -9,10 +9,10 @@ export default function Section({ id, children }) {
     <motion.section
       id={id}
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className="py-14 md:py-24 px-4 sm:px-6 md:px-[5vw] max-w-[1100px] mx-auto relative z-10"
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="py-16 md:py-28 px-4 sm:px-6 md:px-[5vw] max-w-[1100px] mx-auto relative z-10"
     >
       {children}
     </motion.section>
