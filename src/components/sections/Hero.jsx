@@ -48,7 +48,7 @@ export default function Hero() {
           opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
           scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute top-1/2 -translate-y-1/2 left-[2%] 2xl:left-[5%] pointer-events-none z-0"
+        className="absolute top-[44%] -translate-y-1/2 left-[2%] 2xl:left-[5%] pointer-events-none z-0"
       >
         <div className="w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] lg:w-[230px] lg:h-[230px] xl:w-[260px] xl:h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
           <LottieCube />
@@ -62,7 +62,7 @@ export default function Hero() {
           opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
           scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute top-1/2 -translate-y-1/2 right-[2%] 2xl:right-[5%] pointer-events-none z-0"
+        className="absolute top-[44%] -translate-y-1/2 right-[2%] 2xl:right-[5%] pointer-events-none z-0"
       >
         <div className="w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] lg:w-[230px] lg:h-[230px] xl:w-[260px] xl:h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
           <LottieCube />
