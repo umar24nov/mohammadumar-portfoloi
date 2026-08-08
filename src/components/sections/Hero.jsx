@@ -40,17 +40,31 @@ export default function Hero() {
         style={{ background: "radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)" }}
       />
 
-      {/* Rotating wireframe cube backdrop */}
+      {/* Rotating wireframe cube flanking backdrops */}
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.04, 1] }}
+        animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.04, 1] }}
         transition={{
           opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
           scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
+        className="absolute top-1/2 -translate-y-1/2 left-[2%] 2xl:left-[5%] hidden xl:block pointer-events-none z-0"
       >
-        <div className="w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] lg:w-[560px] lg:h-[560px]">
+        <div className="w-[260px] h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
+          <LottieCube />
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.04, 1] }}
+        transition={{
+          opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+          scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+        }}
+        className="absolute top-1/2 -translate-y-1/2 right-[2%] 2xl:right-[5%] hidden xl:block pointer-events-none z-0"
+      >
+        <div className="w-[260px] h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
           <LottieCube />
         </div>
       </motion.div>
