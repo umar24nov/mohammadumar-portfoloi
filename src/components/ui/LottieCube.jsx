@@ -1,9 +1,9 @@
 import Lottie from "lottie-react";
 import cubeAnimation from "../../config/cubeAnimation.json";
 
-export default function LottieCube({ size = 220, className = "" }) {
+export default function LottieCube({ className = "" }) {
   return (
-    <div className={`pointer-events-none ${className}`} style={{ width: size, height: size }}>
+    <div className={`pointer-events-none w-full h-full ${className}`}>
       <Lottie
         animationData={cubeAnimation}
         loop

@@ -42,15 +42,17 @@ export default function Hero() {
 
       {/* Rotating wireframe cube backdrop */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: [0.7, 0.85, 0.7], scale: [1, 1.04, 1] }}
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.04, 1] }}
         transition={{
           opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
           scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0"
+        className="absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
       >
-        <LottieCube size={560} className="hidden sm:block" />
+        <div className="w-[280px] h-[280px] sm:w-[420px] sm:h-[420px] lg:w-[560px] lg:h-[560px]">
+          <LottieCube />
+        </div>
       </motion.div>
 
       <motion.div variants={container} initial="hidden" animate="show" className="max-w-[820px] text-center relative z-10">
