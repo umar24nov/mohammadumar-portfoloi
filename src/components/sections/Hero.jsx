@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-[5vw] relative z-10 grid-bg"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-[5vw] relative z-10 grid-bg pt-20 md:pt-24"
     >
       {/* Ambient glow orbs */}
       <motion.div

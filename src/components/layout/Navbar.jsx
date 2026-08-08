@@ -38,11 +38,20 @@ export default function Navbar({ onFeedback }) {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="nav-logo font-code text-lg font-bold tracking-[2px] bg-transparent border-none cursor-pointer whitespace-nowrap"
-          style={{ color: "var(--text-primary)" }}
+          className="nav-logo bg-transparent border-none cursor-pointer whitespace-nowrap flex items-center"
         >
-          <span className="inline-block">M</span>
-          <span className="gradient-text inline-block">U</span>
+          <svg width="46" height="46" viewBox="0 0 64 64" aria-label="MU">
+            <defs>
+              <linearGradient id="nav-logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff6b35" />
+                <stop offset="100%" stopColor="#d63384" />
+              </linearGradient>
+            </defs>
+            <text fontFamily="JetBrains Mono, monospace" fontSize="36" fontWeight="700">
+              <tspan x="8" y="46" textLength="24" lengthAdjust="spacingAndGlyphs" fill="var(--text-primary)">M</tspan>
+              <tspan x="32" y="46" textLength="24" lengthAdjust="spacingAndGlyphs" fill="url(#nav-logo-grad)">U</tspan>
+            </text>
+          </svg>
         </motion.button>
 
         {/* Desktop nav */}
