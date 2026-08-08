@@ -43,28 +43,28 @@ export default function Hero() {
       {/* Rotating wireframe cube flanking backdrops */}
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.04, 1] }}
+        animate={{ opacity: [0.6, 0.85, 0.6], scale: [1, 1.04, 1] }}
         transition={{
           opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
           scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute top-1/2 -translate-y-1/2 left-[2%] 2xl:left-[5%] hidden xl:block pointer-events-none z-0"
+        className="absolute top-1/2 -translate-y-1/2 left-[2%] 2xl:left-[5%] pointer-events-none z-0"
       >
-        <div className="w-[260px] h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
+        <div className="w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] lg:w-[230px] lg:h-[230px] xl:w-[260px] xl:h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
           <LottieCube />
         </div>
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: [0.8, 1, 0.8], scale: [1, 1.04, 1] }}
+        animate={{ opacity: [0.6, 0.85, 0.6], scale: [1, 1.04, 1] }}
         transition={{
           opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
           scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
         }}
-        className="absolute top-1/2 -translate-y-1/2 right-[2%] 2xl:right-[5%] hidden xl:block pointer-events-none z-0"
+        className="absolute top-1/2 -translate-y-1/2 right-[2%] 2xl:right-[5%] pointer-events-none z-0"
       >
-        <div className="w-[260px] h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
+        <div className="w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] lg:w-[230px] lg:h-[230px] xl:w-[260px] xl:h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
           <LottieCube />
         </div>
       </motion.div>
