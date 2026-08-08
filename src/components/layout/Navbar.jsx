@@ -38,10 +38,11 @@ export default function Navbar({ onFeedback }) {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="nav-logo font-code text-sm font-bold tracking-[3px] bg-transparent border-none cursor-pointer whitespace-nowrap"
+          className="nav-logo font-code text-lg font-bold tracking-[2px] bg-transparent border-none cursor-pointer whitespace-nowrap"
           style={{ color: "var(--text-primary)" }}
         >
-          M<span className="gradient-text">U</span>
+          <span className="inline-block">M</span>
+          <span className="gradient-text inline-block">U</span>
         </motion.button>
 
         {/* Desktop nav */}
