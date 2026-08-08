@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import useTypewriter from "../../hooks/useTypewriter";
+import LottieCube from "../ui/LottieCube";
 import { TYPEWRITER_WORDS, SOCIAL_LINKS } from "../../config/constants";
 
 const container = {
@@ -39,7 +40,20 @@ export default function Hero() {
         style={{ background: "radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)" }}
       />
 
-      <motion.div variants={container} initial="hidden" animate="show" className="max-w-[820px] text-center">
+      {/* Rotating wireframe cube backdrop */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: [0.7, 0.85, 0.7], scale: [1, 1.04, 1] }}
+        transition={{
+          opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+          scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+        }}
+        className="absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0"
+      >
+        <LottieCube size={560} className="hidden sm:block" />
+      </motion.div>
+
+      <motion.div variants={container} initial="hidden" animate="show" className="max-w-[820px] text-center relative z-10">
         {/* Terminal status line */}
         <motion.div variants={fadeUp} className="flex items-center justify-center gap-3 mb-8">
           <motion.div
