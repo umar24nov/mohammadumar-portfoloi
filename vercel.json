@@ -7,6 +7,6 @@
     { "source": "/((?!static/|api/).*)", "destination": "/index.html" }
   ],
   "crons": [
-    { "path": "/api/check-github", "schedule": "0 18 * * *" }
+    { "path": "/api/check-github", "schedule": "29 18 * * *" }
   ]
 }

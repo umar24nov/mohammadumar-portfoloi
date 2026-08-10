@@ -1,0 +1,13 @@
+name: Commit Monitor
+
+on:
+  schedule:
+    - cron: "30 3,7,11,15 * * *" # 9:00, 13:00, 17:00, 21:00 IST
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping GitHub monitor
+        run: curl -fsS "https://www.mohammadumarportfoloi.online/api/check-github" -H "x-monitor-token: ${{ secrets.MONITOR_TOKEN }}"
