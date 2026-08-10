@@ -1,25 +1,42 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "./firebase";
+const API_BASE = process.env.REACT_APP_API_URL || "/api";
 
-async function submitToCollection(collectionName, data) {
-  try {
-    const docRef = await addDoc(collection(db, collectionName), {
-      ...data,
-      createdAt: serverTimestamp(),
-      status: "new",
-    });
-    return { success: true, id: docRef.id };
-  } catch (err) {
-    throw new Error(
-      err.message || "Network error. Please try again."
-    );
+async function request(endpoint, options = {}) {
+  const url = `${API_BASE}${endpoint}`;
+
+  const config = {
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  };
+
+  if (config.body && typeof config.body === "object") {
+    config.body = JSON.stringify(config.body);
   }
+
+  let res;
+  try {
+    res = await fetch(url, config);
+  } catch {
+    throw new Error("Network error. Please try again.");
+  }
+
+  let data = {};
+  try {
+    data = await res.json();
+  } catch {
+    /* no JSON body */
+  }
+
+  if (!res.ok) {
+    throw new Error(data.error || `Request failed with status ${res.status}`);
+  }
+
+  return data;
 }
 
 export const feedbackAPI = {
-  submit: (data) => submitToCollection("feedback", data),
+  submit: (data) => request("/feedback", { method: "POST", body: data }),
 };
 
 export const contactAPI = {
-  submit: (data) => submitToCollection("contact", data),
+  submit: (data) => request("/contact", { method: "POST", body: data }),
 };

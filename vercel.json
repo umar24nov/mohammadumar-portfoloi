@@ -4,6 +4,9 @@
   "framework": "create-react-app",
   "installCommand": "npm install",
   "rewrites": [
-    { "source": "/((?!static/).*)", "destination": "/index.html" }
+    { "source": "/((?!static/|api/).*)", "destination": "/index.html" }
+  ],
+  "crons": [
+    { "path": "/api/check-github", "schedule": "0 18 * * *" }
   ]
 }
