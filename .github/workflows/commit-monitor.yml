@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping GitHub monitor
-        run: curl -fsS "https://www.mohammadumarportfoloi.online/api/check-github" -H "x-monitor-token: ${{ secrets.MONITOR_TOKEN }}"
+        run: 'curl -fsS "https://www.mohammadumarportfoloi.online/api/check-github" -H "x-monitor-token: ${{ secrets.MONITOR_TOKEN }}"'
