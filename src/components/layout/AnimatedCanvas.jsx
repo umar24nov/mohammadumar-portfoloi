@@ -51,7 +51,7 @@ export default function AnimatedCanvas() {
 
         ctx.save();
         ctx.globalAlpha = s.opacity;
-        ctx.strokeStyle = "#00d4ff";
+        ctx.strokeStyle = "#d63384";
         ctx.lineWidth = 1.2;
 
         if (s.type === "circle") {
