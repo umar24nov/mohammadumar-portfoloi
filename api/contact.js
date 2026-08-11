@@ -43,8 +43,9 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${key}`,
       },
       body: JSON.stringify({
-        from,
+        from: `Mohd Umar <${from}>`,
         to,
+        reply_to: to,
         subject: `New contact from ${esc(name)}${subject ? ` — ${esc(subject)}` : ""}`,
         html,
       }),

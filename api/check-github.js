@@ -154,7 +154,7 @@ async function sendEmail({ subject, body, streakLine, count, pushes, dateStr }) 
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`,
     },
-    body: JSON.stringify({ from, to, subject, html }),
+    body: JSON.stringify({ from: `Mohd Umar <${from}>`, to, reply_to: to, subject, html }),
   });
 
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
