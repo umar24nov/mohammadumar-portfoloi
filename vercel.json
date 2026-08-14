@@ -5,8 +5,5 @@
   "installCommand": "npm install",
   "rewrites": [
     { "source": "/((?!static/|api/).*)", "destination": "/index.html" }
-  ],
-  "crons": [
-    { "path": "/api/check-github", "schedule": "29 18 * * *" }
   ]
 }
