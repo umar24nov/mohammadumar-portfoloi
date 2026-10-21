@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import useTypewriter from "../../hooks/useTypewriter";
-import LottieCube from "../ui/LottieCube";
 import { TYPEWRITER_WORDS, SOCIAL_LINKS } from "../../config/constants";
 
 const container = {
@@ -41,33 +40,7 @@ export default function Hero() {
       />
 
       {/* Rotating wireframe cube flanking backdrops */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: [0.6, 0.85, 0.6], scale: [1, 1.04, 1] }}
-        transition={{
-          opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-          scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
-        }}
-        className="absolute hidden lg:block top-[34%] lg:top-[33%] xl:top-[32%] 2xl:top-[35.5%] left-[2%] 2xl:left-[5%] pointer-events-none z-0"
-      >
-        <div className="-translate-y-1/2 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] lg:w-[230px] lg:h-[230px] xl:w-[260px] xl:h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
-          <LottieCube />
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: [0.6, 0.85, 0.6], scale: [1, 1.04, 1] }}
-        transition={{
-          opacity: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-          scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
-        }}
-        className="absolute hidden lg:block top-[34%] lg:top-[33%] xl:top-[32%] 2xl:top-[35.5%] right-[2%] 2xl:right-[5%] pointer-events-none z-0"
-      >
-        <div className="-translate-y-1/2 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] lg:w-[230px] lg:h-[230px] xl:w-[260px] xl:h-[260px] 2xl:w-[340px] 2xl:h-[340px]">
-          <LottieCube />
-        </div>
-      </motion.div>
+      {/* Lottie cubes removed as requested */}
 
       <motion.div variants={container} initial="hidden" animate="show" className="max-w-[820px] text-center relative z-10">
         {/* Terminal status line */}
