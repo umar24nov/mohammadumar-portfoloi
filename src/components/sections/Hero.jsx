@@ -39,8 +39,7 @@ export default function Hero() {
         style={{ background: "radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%)" }}
       />
 
-      {/* Rotating wireframe cube flanking backdrops */}
-      {/* Lottie cubes removed as requested */}
+      {/* Ambient glow orbs */}
 
       <motion.div variants={container} initial="hidden" animate="show" className="max-w-[820px] text-center relative z-10">
         {/* Terminal status line */}

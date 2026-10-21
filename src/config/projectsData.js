@@ -36,8 +36,8 @@ const projects = [
     emoji: "🌐",
     tagline: "Personal Brand & Showcase",
     description:
-      "This very site — animated React portfolio with Lottie cube animations, scroll reveals, a code signature and GitHub stats. Built with React, Tailwind CSS & Framer Motion.",
-    tech: ["React", "Tailwind CSS", "Framer Motion", "Lottie"],
+      "This very site — animated React portfolio with scroll reveals, a code signature and GitHub stats. Built with React, Tailwind CSS & Framer Motion.",
+    tech: ["React", "Tailwind CSS", "Framer Motion"],
     accent: "text-[#d63384]",
     border: "hover:border-[#d63384]",
     topBar: "from-[#d63384]",
